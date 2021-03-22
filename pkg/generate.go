@@ -9,6 +9,8 @@ import (
 	"path/filepath"
 )
 
+//go:generate go-bindata -o=./asset.go -pkg=pkg ../assets
+
 const (
 	CMD      = "cmd"
 	INTERNAL = "internal"
@@ -89,8 +91,8 @@ func (g *Generate) mkdirContents() (err error) {
 			return err
 		}
 		if contents[i] == GITHOOKS {
-			restoreAssets("assets/pre-commit", filepath.Join(g.packagePath, g.packageName, contents[i]), "pre-commit")
-			restoreAssets("assets/commit-msg", filepath.Join(g.packagePath, g.packageName, contents[i]), "commit-msg")
+			restoreAssets("../assets/pre-commit", filepath.Join(g.packagePath, g.packageName, contents[i]), "pre-commit")
+			restoreAssets("../assets/commit-msg", filepath.Join(g.packagePath, g.packageName, contents[i]), "commit-msg")
 		}
 	}
 
@@ -114,11 +116,11 @@ func (g *Generate) goModAndGitInit() error {
 }
 
 func (g *Generate) gitIgnore() error {
-	return restoreAssets("assets/.gitignore", filepath.Join(g.packagePath, g.packageName), ".gitignore")
+	return restoreAssets("../assets/.gitignore", filepath.Join(g.packagePath, g.packageName), ".gitignore")
 }
 
 func (g *Generate) golangCi() error {
-	return restoreAssets("assets/.golangci.yaml", filepath.Join(g.packagePath, g.packageName), ".golangci.yaml")
+	return restoreAssets("../assets/.golangci.yaml", filepath.Join(g.packagePath, g.packageName), ".golangci.yaml")
 }
 
 func restoreAssets(assetName, packagePath, fileName string) error {
