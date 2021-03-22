@@ -23,25 +23,73 @@
 * test：额外的外部测试应用程序和测试数据
 
 
+其他目录：
+
+* assets: 静态文件、图片等 
+  
+* tools: 工具类相关
+
+    ...
+
 当然这只是一种规范，其他的包名以及层级结构也是灵活的。该项目会严格规范来命名和创建
 
 
 ### Git提交规范
+commit message格式
 
-// TODO 规范说明 （husky工具 ｜ githook加脚本验证）
-* commit-msg check
-* gofmt format code
+`<type>(<scope>): <subject>`
+
+**type(必须)**
+
+用于说明git commit的类别，只允许使用下面的标识。
+
+* feat：新功能（feature）。
+
+* fix/to：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。
+
+  * fix：产生diff并自动修复此问题。适合于一次提交直接修复问题
+  * to：只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix
+
+* docs：文档（documentation）。
+
+* style：格式（不影响代码运行的变动）。
+
+* refactor：重构（即不是新增功能，也不是修改bug的代码变动）。
+
+* perf：优化相关，比如提升性能、体验。
+
+* test：增加测试。
+
+* chore：构建过程或辅助工具的变动。
+
+* revert：回滚到上一个版本。
+
+* merge：代码合并。
+
+* sync：同步主线或分支的Bug。
+
+**scope(可选)**
+
+scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
+
+**subject(必须)**
+
+subject是commit目的的简短描述，不超过50个字符。
+
+如果英文表达不是很好，建议使用中文（用中文描述问题能更清楚一些）
+
 
 ### golangci-lint
-[golangci-lint](https://github.com/golangci/golangci-lint)
+[golangci-lint 静态代码检测工具](https://github.com/golangci/golangci-lint)
 
-// TODO 
+
+### 利用git hook 对代码和提交进行校验
+
+项目生成时，会在githooks目录下会生成commit-msg 和 pre.commit文件定义了commit的规范检查和触发golangci-lint进行代码检查，主要通过软连接的方式将githook下的文件链接到该项目/.git/hook目录下
 
 
 ### CICD
-
-// TODO（通过脚手架生成dockerfile k8s的yaml文件）
-
+项目创建成功，编写了
 
 
 

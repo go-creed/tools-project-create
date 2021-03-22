@@ -1,0 +1,15 @@
+#!/bin/sh
+
+msg=$(cat $1)
+
+pattern='^(feat|fix|to｜hotfix|test|docs|style|refactor|perf|test|chroe|revert|merge|sync)\(?.*\)?:.*$'
+
+if  [[ $msg =~ $pattern ]]; then
+  echo "commit msg pass"
+else
+    echo "====================================================================================================================="
+    echo  "                                 THE FORMAT OF COMMIT MSG IS ERROR"
+    echo  "The format must be one of (feat|fix|to｜hotfix|test|docs|style|refactor|perf|test|chroe|revert|merge|sync)\(?.*\)?:.*$"
+    echo "====================================================================================================================="
+    exit 1
+fi

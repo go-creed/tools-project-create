@@ -1,0 +1,115 @@
+linters:
+  disable-all: true
+  enable:
+    - asciicheck
+    - bodyclose
+    - errcheck
+    - exhaustive
+    - exportloopref
+    #    #- gosec
+    - govet
+    - noctx
+    - rowserrcheck
+    - scopelint
+    - sqlclosecheck
+    - staticcheck
+    - typecheck
+    #    - asciicheck
+    #    - bodyclose
+    - deadcode
+#    - depguard
+#    - dogsled
+#    - dupl
+#    - errcheck
+#    - exhaustive
+#    - exportloopref
+#    - funlen
+#    - gci
+#    # 检查是否存在全局变量，当前的框架没法做到不使用全局变量，config和router都需要以全局变量的形式来提供
+#    #- gochecknoglobals
+#    # 检查是否使用init函数，当前的框架也没法做到不使用全局函数(至少很难做到，这个可以考虑是否一定要强行推)
+#    #- gochecknoinits
+#    - gocognit
+#    - goconst
+#    - gocritic
+#    - gocyclo
+#    # 检查包级变量和函数的注释是否有句号(.)结尾，很鸡肋的一个功能，而且如果是写中文注释，无法识别句号(。)
+#    #- godot
+#    - godox
+#    # 检查返回的错误(error)是否都是定义好的包级变量，不允许动态构造错误，用这个就无法得到错误上下文了
+#    #- goerr113
+#    - gofmt
+#    - gofumpt
+#    - goheader
+#    - goimports
+#    - golint
+#    - gomnd
+#    - gomodguard
+#    - goprintffuncname
+#    - gosec
+#    - gosimple
+#    - govet
+#    - ineffassign
+#    - interfacer
+#    - lll
+#    - maligned
+#    - misspell
+#    - nakedret
+#    - nestif
+#    # 检查每一句return前面是否都有一个空行，个人觉得这个不是很有必要，而且实际试了一下，其实一点儿也不美观
+#    #- nlreturn
+#    - noctx
+#    - nolintlint
+#    - prealloc
+#    - rowserrcheck
+#    - scopelint
+#    - sqlclosecheck
+#    - staticcheck
+#    - structcheck
+#    - stylecheck
+#    - testpackage
+#    - typecheck
+#    - unconvert
+#    - unparam
+#    - unused
+#    - varcheck
+#    - whitespace
+#    # 检查很多语句块(譬如if/for等)前面是否有一个空行，有点像是nlreturn的加强版，个人感觉意义也不大
+#    #- wsl
+
+run:
+  tests: false
+  timeout: 10m
+  skip-dirs:
+  skip-files:
+
+linters-settings:
+  dupl:
+    threshold: 300
+  funlen:
+    lines: 200
+    statements: 100
+  lll:
+    line-length: 240
+    tab-width: 1
+
+issues:
+  exclude-rules:
+    - linters:
+        - gosec
+      text: "G101: Potential hardcoded credentials"
+    - linters:
+        - staticcheck
+      text: "SA1019: package github.com/golang/protobuf/proto is deprecated"
+    - linters:
+        - exhaustive
+      text: "missing cases in switch of type"
+    - linters:
+        - noctx
+      text: "must not be called"
+    - linters:
+        - rowserrcheck
+      text: "rows.Err must be checked"
+    - linters:
+        - staticcheck
+      text: "SA1019: http.CloseNotifier is deprecated"
